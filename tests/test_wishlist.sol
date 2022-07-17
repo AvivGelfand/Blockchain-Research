@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
 
+
 contract CustomerPreferences {
     
     // Eevents
@@ -41,11 +42,6 @@ contract CustomerPreferences {
     }
 
 
-    // 0x57e249ee06eaace1940d50c53f83a2379596ee56f575e7b2da5612906fb1b610 // private
-    // bytes32 private constant SHOW = keccak256(abi.encodePacked("SHOW")); // should not be constant
-    // 0xef59a5c75ef68c471c8ccfd3cb4466e331a6f232248a5885e29e15acc105f885 // private
-    // bytes32 private constant HIDE = keccak256(abi.encodePacked("HIDE")); // should not be constant
-
     bool private ShareWishList = false;
         
      // USER setting HIDE / SHOW:
@@ -57,13 +53,64 @@ contract CustomerPreferences {
     {
         _setPref (_toshare);
     }
-
-
-    
-    // 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
-
-    // NOW SET FOR GRANTED SHARE TO GET DETAILS OF WISH LIST
-
-
-    // Transaction HASHES COULD BE THE DATA!
 }
+
+contract WishListTest {
+    address owner; 
+    constructor() { 
+        owner = msg.sender; 
+        // address that deploys contract will be the owner 
+    } 
+
+    bool isSharing = false;
+
+    struct Item {
+        string text;
+        bool purchased; // Purchased or not
+    }
+    struct Wishlist{
+        Item[] items;
+        bool isSharing;
+    }
+
+    // An array of 'WishList' structs
+    mapping( address =>  Wishlist)  public WishLists;
+
+    function toggleShare() public {
+        require(msg.sender == owner);
+        WishLists[msg.sender].isSharing = !isSharing;
+    }
+
+    function create(string calldata _text) public {
+        // initialize an empty struct and then update it
+        // require(whitelist.isMember(account), "Account not whitelisted.");
+        Item memory newItem;
+        newItem.text = _text;
+        // tobuy.completed initialized to false
+        WishLists[msg.sender].items.push(newItem);
+    }
+
+   
+    // get:
+    // Solidity automatically created a getter for 'items' so
+    // you don't actually need this function.
+    function get(address _customer, uint _index) public view returns (string memory text, bool purchased)
+    {
+        require(WishLists[_customer].isSharing);
+        Item storage item = WishLists[_customer].items[_index];
+        return (item.text, item.purchased);
+    }
+
+    //Later on make it a get list function.
+
+} //End Wishlist
+
+
+
+
+    // modifier isSharing(address _usderAdress){
+    //     CustomerPreferences cp = CustomerPreferences(_contractAdress);
+    //     cp.setX(_x);
+    //     require (roles[_role][msg.sender], "not authorised");
+    //     _;
+    // }

@@ -1,10 +1,39 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.6+commit.11564f7e"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "WishLists",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "text",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "purchased",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
 			{
 				"inputs": [
 					{
@@ -14,85 +43,6 @@
 					}
 				],
 				"name": "create",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_index",
-						"type": "uint256"
-					}
-				],
-				"name": "get",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "text",
-						"type": "string"
-					},
-					{
-						"internalType": "bool",
-						"name": "purchased",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "items",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "text",
-						"type": "string"
-					},
-					{
-						"internalType": "bool",
-						"name": "purchased",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_index",
-						"type": "uint256"
-					}
-				],
-				"name": "toggleCompleted",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_index",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_text",
-						"type": "string"
-					}
-				],
-				"name": "updateText",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -111,9 +61,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"project\\WishList.sol": "WishList"
+			"tests\\test_wishlist.sol": "WishList"
 		},
-		"evmVersion": "london",
+		"evmVersion": "berlin",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -125,12 +75,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"project\\WishList.sol": {
-			"keccak256": "0x3b19a9d559dd603a6605c4507edb19d59f0075b714f2ab020b576cb035689709",
+		"tests\\test_wishlist.sol": {
+			"keccak256": "0x1a9e9b3b395d1d645545208df44103d73715955da6cc22072ab0c0572786095c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://73ca16febeccd79f2b400f5b4224ddf714aed0837ae293fe936de67e1e55ae41",
-				"dweb:/ipfs/QmNeZk5xczRcnBQSATBqaFLSAGbcWGbRD8y7enE3q7vK7J"
+				"bzz-raw://0db6154d74d0056115ee5d042f617951b41d466c6e759b552195143affcccc47",
+				"dweb:/ipfs/QmSLC5mU5dWPab1aosdTJ93Ch5MbT4XEpB46ou3BpJpf37"
 			]
 		}
 	},

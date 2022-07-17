@@ -42,8 +42,4 @@ contract AccessControl {
         emit RevokeRole(_role, _account);   
     }
 
-    //  prefNum = 0 means not approoving of sharing details
-    uint8 public prefNum = 0 ;
-    //  prefNum = 1 means not approoving of sharing details
-    uint8 public prefNum1 = 1 ;
 }

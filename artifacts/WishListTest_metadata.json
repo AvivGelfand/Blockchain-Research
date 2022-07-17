@@ -11,61 +11,18 @@
 				"type": "constructor"
 			},
 			{
-				"anonymous": false,
 				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "bytes32",
-						"name": "role",
-						"type": "bytes32"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
-					}
-				],
-				"name": "GrantRole",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "bool",
-						"name": "share",
-						"type": "bool"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
-					}
-				],
-				"name": "SetShare",
-				"type": "event"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
-					},
 					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
 					}
 				],
-				"name": "roles",
+				"name": "WishLists",
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "isSharing",
 						"type": "bool"
 					}
 				],
@@ -75,12 +32,48 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "_text",
+						"type": "string"
+					}
+				],
+				"name": "create",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_customer",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_index",
+						"type": "uint256"
+					}
+				],
+				"name": "get",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "text",
+						"type": "string"
+					},
+					{
 						"internalType": "bool",
-						"name": "_toshare",
+						"name": "purchased",
 						"type": "bool"
 					}
 				],
-				"name": "setPref",
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "toggleShare",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -99,7 +92,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"tests\\test_wishlist.sol": "CustomerPreferences"
+			"tests\\test_wishlist.sol": "WishListTest"
 		},
 		"evmVersion": "berlin",
 		"libraries": {},

@@ -1,42 +1,50 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
 
-contract WishList {
+contract WishListTest {
+    address owner; 
+    constructor() { 
+        owner = msg.sender; 
+        // address that deploys contract will be the owner 
+    } 
+
+    bool isSharing = false;
+
     struct Item {
         string text;
-        bool purchased; // Purchased, completed
+        bool purchased; // Purchased or not
+    }
+    struct Wishlist{
+        Item[] items;
+        bool isSharing;
     }
 
     // An array of 'WishList' structs
-    Item[] public items; //items
+    mapping( address =>  Wishlist)  public WishLists;
+
+    function toggleShare() public {
+        require(msg.sender == owner);
+        WishLists[msg.sender].isSharing = !isSharing;
+    }
 
     function create(string calldata _text) public {
         // initialize an empty struct and then update it
-        Item memory tobuy;
-        tobuy.text = _text;
+        // require(whitelist.isMember(account), "Account not whitelisted.");
+        Item memory newItem;
+        newItem.text = _text;
         // tobuy.completed initialized to false
-        items.push(tobuy);
+        WishLists[msg.sender].items.push(newItem);
     }
 
+   
+    // get:
     // Solidity automatically created a getter for 'items' so
     // you don't actually need this function.
-    function get(uint _index) public view returns (string memory text, bool purchased) {
-        Item storage tobuy = items[_index];
-        return (tobuy.text, tobuy.purchased);
+    function get(address _customer, uint _index) public view returns (string memory text, bool purchased)
+    {
+        require(WishLists[_customer].isSharing);
+        Item storage item = WishLists[_customer].items[_index];
+        return (item.text, item.purchased);
     }
 
-    // update text
-    function updateText(uint _index, string calldata _text) public {
-        Item storage tobuy = items[_index];
-        tobuy.text = _text;
-    }
+    //Later on make it a get list function.
 
-    // update completed
-    function toggleCompleted(uint _index) public {
-        Item storage tobuy = items[_index];
-        tobuy.purchased = !tobuy.purchased;
-    }
-
-}
-
-
+} //End Wishlist
