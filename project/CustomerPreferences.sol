@@ -12,7 +12,7 @@ contract CustomerPreferences {
     // Prefrences Array: prefersnce => account => bool
     // mapping(bytes32 => mapping ( address => bool) ) public prefrencess;
     // we save gas by mapping the name to numbers
-        
+    
     // role => account => bool
     mapping(bytes32 => mapping ( address => bool) ) public roles;
     // we save gas by mapping the names to numbers
@@ -47,7 +47,7 @@ contract CustomerPreferences {
     // bytes32 private constant HIDE = keccak256(abi.encodePacked("HIDE")); // should not be constant
 
     bool private ShareWishList = false;
-        
+    
      // USER setting HIDE / SHOW:
     function _setPref(bool _toshare) internal {
         emit SetShare(_toshare, msg.sender);
@@ -57,8 +57,6 @@ contract CustomerPreferences {
     {
         _setPref (_toshare);
     }
-
-
     
     // 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
 

@@ -78,7 +78,9 @@ contract WishListTest {
 
     function toggleShare() public {
         require(msg.sender == owner);
-        WishLists[msg.sender].isSharing = !isSharing;
+        bool isCurrentlySharing = WishLists[msg.sender].isSharing;
+        
+        WishLists[msg.sender].isSharing = isCurrentlySharing ? false : true;
     }
 
     function create(string calldata _text) public {
@@ -96,7 +98,8 @@ contract WishListTest {
     // you don't actually need this function.
     function get(address _customer, uint _index) public view returns (string memory text, bool purchased)
     {
-        require(WishLists[_customer].isSharing);
+        require(WishLists[_customer].isSharing||msg.sender == owner);
+
         Item storage item = WishLists[_customer].items[_index];
         return (item.text, item.purchased);
     }
