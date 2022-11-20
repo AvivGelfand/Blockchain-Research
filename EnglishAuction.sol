@@ -21,31 +21,27 @@ contract EnglishAuction {
     event Withdraw(address indexed bidder, uint amount);
     event End(address winner, uint amount);
 
+    // IERC721 public nft;
     uint public age;
-    uint public customerId;
-    uint public quantity;
+    uint public userId;
 
     address payable public seller;
-    uint public endAt;
+    // uint public endAt;
     bool public started;
     bool public ended;
 
     address public highestBidder;
-    // address public highestBidder;
-
     uint public highestBid;
     mapping(address => uint) public bids;
-    mapping(address => uint) public asks;
 
     constructor(
         uint _age,
-        uint _customerId,
-        uint _startingBid,
-        uint _quantity
+        uint _userId,
+        uint _startingBid
     ) {
         age = _age;
-        customerId = _customerId;
-        quantity = _quantity;
+        userId = _userId;
+
         seller = payable(msg.sender);
         highestBid = _startingBid;
     }
@@ -54,17 +50,16 @@ contract EnglishAuction {
         require(!started, "started");
         require(msg.sender == seller, "not seller");
 
-
-        // nft.transferFrom(msg.sender, address(this), customerId);
+        // nft.transferFrom(msg.sender, address(this), nftId);
         started = true;
-        endAt = block.timestamp + 7 days;
+        // endAt = block.timestamp +60;
 
         emit Start();
     }
 
     function bid() external payable {
         require(started, "not started");
-        require(block.timestamp < endAt, "ended");
+        // require(block.timestamp < endAt, "ended");
         require(msg.value > highestBid, "value < highest");
 
         if (highestBidder != address(0)) {
@@ -87,16 +82,17 @@ contract EnglishAuction {
 
     function end() external {
         require(started, "not started");
-        require(block.timestamp >= endAt, "not ended");
+        // require(block.timestamp >= endAt, "not ended");
         require(!ended, "ended");
 
         ended = true;
         if (highestBidder != address(0)) {
-            // nft.safeTransferFrom(address(this), highestBidder, customerId);
-            
+            // nft.safeTransferFrom(address(this), highestBidder, nftId);
             seller.transfer(highestBid);
+        
         } else {
-            // nft.safeTransferFrom(address(this), seller, customerId);
+            // nft.safeTransferFrom(address(this), seller, nftId);
+
         }
 
         emit End(highestBidder, highestBid);
